@@ -1,27 +1,33 @@
 package com.jesusDias.listatelefones.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Contato implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String telefone;
-	private Date nacimento;
+	private String nascimento;
 	private String email;
 	
 	public Contato() {
 		
 	}
 
-	public Contato( Long id, String nome, String telefone, Date nacimento, String email) {
+	public Contato( Long id, String nome, String telefone, String nascimento, String email) {
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
-		this.nacimento = nacimento;
+		this.nascimento = nascimento;
 		this.email = email;
 	}
 	
@@ -51,12 +57,12 @@ public class Contato implements Serializable{
 		this.telefone = telefone;
 	}
 
-	public Date getNacimento() {
-		return nacimento;
+	public String getNacimento() {
+		return nascimento;
 	}
 
-	public void setNacimento(Date nacimento) {
-		this.nacimento = nacimento;
+	public void setNacimento(String nacimento) {
+		this.nascimento = nacimento;
 	}
 
 	public String getEmail() {
