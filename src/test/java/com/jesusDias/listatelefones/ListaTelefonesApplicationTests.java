@@ -1,0 +1,13 @@
+package com.jesusDias.listatelefones;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ListaTelefonesApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
