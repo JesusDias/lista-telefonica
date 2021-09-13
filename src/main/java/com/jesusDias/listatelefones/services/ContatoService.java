@@ -19,6 +19,7 @@ public class ContatoService {
 		return repository.findAll();
 	}
 	
+	
 	public Contato findById(Long id) {
 		Optional<Contato> obj = repository.findById(id);
 		return obj.get();

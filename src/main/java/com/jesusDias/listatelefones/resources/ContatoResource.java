@@ -1,6 +1,9 @@
  package com.jesusDias.listatelefones.resources;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+//import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,18 +16,18 @@ import com.jesusDias.listatelefones.services.ContatoService;
 @RequestMapping(value = "/contatos")
 public class ContatoResource {
 	
+	@Autowired
 	private ContatoService service;
 	
 	@GetMapping
 	public ResponseEntity<List<Contato>> findAll(){
 		List<Contato> list  = service.findAll();
-		//Contato c = new Contato(2L, "jesua", "999", "222", "haufhuifhi");
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping(value = "{/id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<Contato> findById(@PathVariable Long id){
 		Contato obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
-		}
+	}
 }
