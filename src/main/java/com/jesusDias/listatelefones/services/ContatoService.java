@@ -28,8 +28,15 @@ public class ContatoService {
 	
 	
 	public Contato insert(Contato obj) {
+		obj.setId(null);
 		return repository.save(obj);
 	}
+	
+	public Contato update(Contato obj) {
+		findById(obj.getId());
+		return repository.save(obj);
+	}
+	
 	
 	public void delete(Long id) {
 		repository.deleteById(id);
