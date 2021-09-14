@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jesusDias.listatelefones.entities.Contato;
 import com.jesusDias.listatelefones.repositories.ContatoRepository;
+import com.jesusDias.listatelefones.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ContatoService {
@@ -22,6 +23,17 @@ public class ContatoService {
 	
 	public Contato findById(Long id) {
 		Optional<Contato> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id + ", tipo: " + Contato.class.getName()));
 	}
+	
+	
+	public Contato insert(Contato obj) {
+		return repository.save(obj);
+	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	
+	
 }
