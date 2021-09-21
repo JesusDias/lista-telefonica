@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Contato implements Serializable{
@@ -14,9 +18,14 @@ public class Contato implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotEmpty(message="Preenchimento obrigatório ")
+	@Length(min=5, max=50, message="Tamanho deve ser de 5 a 80 caracteres ")
 	private String nome;
 	private String telefone;
 	private String nascimento;
+	
+	@Email(message="Email inválido")
 	private String email;
 	
 	public Contato() {
@@ -57,12 +66,13 @@ public class Contato implements Serializable{
 		this.telefone = telefone;
 	}
 
-	public String getNacimento() {
+
+	public String getNascimento() {
 		return nascimento;
 	}
 
-	public void setNacimento(String nacimento) {
-		this.nascimento = nacimento;
+	public void setNascimento(String nascimento) {
+		this.nascimento = nascimento;
 	}
 
 	public String getEmail() {

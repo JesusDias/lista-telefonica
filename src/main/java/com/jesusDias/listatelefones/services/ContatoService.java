@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.jesusDias.listatelefones.dto.ContatoDTO;
 import com.jesusDias.listatelefones.entities.Contato;
 import com.jesusDias.listatelefones.repositories.ContatoRepository;
 import com.jesusDias.listatelefones.services.exceptions.ObjectNotFoundException;
@@ -18,10 +19,13 @@ public class ContatoService {
 	
 	@Autowired
 	private ContatoRepository repository;
+
+
 	
 	public List<Contato> findAll(){
 		return repository.findAll();
 	}
+	
 	
 	
 	public Contato findById(Long id) {
@@ -30,15 +34,20 @@ public class ContatoService {
 	}
 	
 	
+	
 	public Contato insert(Contato obj) {
 		obj.setId(null);
 		return repository.save(obj);
 	}
 	
+	
+	
 	public Contato update(Contato obj) {
-		findById(obj.getId());
-		return repository.save(obj);
+		Contato newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return repository.save(newObj);
 	}
+	
 	
 	
 	public void delete(Long id) {
@@ -46,10 +55,24 @@ public class ContatoService {
 		repository.deleteById(id);
 	}
 	
+	
+	
 	public Page<Contato> findPage(Integer page, Integer linensPerPage, String orderBy, String direction){
 		PageRequest  pageRequest = PageRequest.of(page, linensPerPage, Direction.valueOf(direction), orderBy);
 		return repository.findAll(pageRequest);
 	}
 	
 	
+	
+	public Contato fromDTO(ContatoDTO objDTO) {
+		return new Contato(objDTO.getId(), objDTO.getNome(), objDTO.getTelefone(), null, null);
+	}
+	
+	
+	
+	private void updateData(Contato newObj, Contato obj) {
+		newObj.setId(obj.getId());
+		newObj.setNome(obj.getNome());
+		newObj.setTelefone(obj.getTelefone());	
+	}
 }

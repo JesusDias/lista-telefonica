@@ -7,13 +7,10 @@ import com.jesusDias.listatelefones.entities.Contato;
 public class ContatoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
 	private Long id;
 	private String nome;
 	private String telefone;
-	private String nascimento;
-	private String email;
-	
+
 	public ContatoDTO() {
 		
 	}
@@ -22,9 +19,8 @@ public class ContatoDTO implements Serializable {
 		id = obj.getId();
 		nome = obj.getNome();
 		telefone = obj.getTelefone();
-		nascimento = obj.getNacimento();
-		email = obj.getEmail();
 	}
+	
 
 	public Long getId() {
 		return id;
@@ -48,22 +44,6 @@ public class ContatoDTO implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public String getNascimento() {
-		return nascimento;
-	}
-
-	public void setNascimento(String nascimento) {
-		this.nascimento = nascimento;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 }
