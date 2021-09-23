@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jesusDias.listatelefones.dto.ContatoDTO;
 import com.jesusDias.listatelefones.entities.Contato;
+import com.jesusDias.listatelefones.resources.utils.URL;
 import com.jesusDias.listatelefones.services.ContatoService;
 
 import io.swagger.annotations.Api;
@@ -105,5 +106,23 @@ public class ContatoResource {
 		Page<ContatoDTO> listDTO = list.map(obj -> new ContatoDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
 	}
+	
 
+	
+	@GetMapping("/filter")
+	@ApiOperation(value="Retorna uma lista filtrada de contatos paginados")
+	public ResponseEntity<Page<ContatoDTO>> findnome(
+			
+			@RequestParam(value = "nome", defaultValue = "") String nome, 
+			@RequestParam(value = "page", defaultValue = "0") Integer page, 
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linensPerPage, 
+			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction){
+		
+		String nomeDecoded = URL.decodeParam(nome);
+		Page<Contato> list = service.findnome(nomeDecoded, page, linensPerPage, orderBy, direction);
+		Page<ContatoDTO> listDTO = list.map(obj -> new ContatoDTO(obj));
+		return ResponseEntity.ok().body(listDTO);
+	}
+		
 }

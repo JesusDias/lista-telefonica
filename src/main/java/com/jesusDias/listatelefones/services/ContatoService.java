@@ -75,4 +75,11 @@ public class ContatoService {
 		newObj.setNome(obj.getNome());
 		newObj.setTelefone(obj.getTelefone());	
 	}
+
+
+	
+	public Page<Contato> findnome(String nome, Integer page, Integer linensPerPage, String orderBy, String direction){
+		PageRequest  pageRequest = PageRequest.of(page, linensPerPage, Direction.valueOf(direction), orderBy);
+		return repository.findByNomeContains(nome, pageRequest);
+	}
 }
